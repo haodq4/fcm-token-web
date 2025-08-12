@@ -1,7 +1,7 @@
-importScripts("https://www.gstatic.com/firebasejs/10.3.0/firebase-app-compat.js");
-importScripts("https://www.gstatic.com/firebasejs/10.3.0/firebase-messaging-compat.js");
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js';
+import { getMessaging, onBackgroundMessage } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-messaging.js';
 
-firebase.initializeApp({
+const firebaseConfig = {
   apiKey: "AIzaSyCbvoGeyqsnQPqXioPaivQl_CVw1KDtLqg",
   authDomain: "happy-club-stg.firebaseapp.com",
   projectId: "happy-club-stg",
@@ -9,11 +9,12 @@ firebase.initializeApp({
   messagingSenderId: "428613555450",
   appId: "1:428613555450:web:f3bbdbcff7af356e19e543",
   measurementId: "G-SR5MNPQMP6"
-});
+};
 
-const messaging = firebase.messaging();
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
 
-messaging.onBackgroundMessage((payload) => {
+onBackgroundMessage(messaging, (payload) => {
   const notificationTitle = payload.notification?.title || "";
   const notificationOptions = {
     body: payload.notification?.body || "",
