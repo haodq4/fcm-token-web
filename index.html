@@ -18,7 +18,7 @@
 
     document.getElementById("getTokenBtn").addEventListener("click", async () => {
       try {
-        const swReg = await navigator.serviceWorker.register('./firebase-messaging-sw.js');
+        const swReg = await navigator.serviceWorker.register('./firebase-messaging-sw.js', { type: 'module' });
 
         const currentToken = await getToken(messaging, {
           vapidKey: "BNkGDlTeioh_8amX8VTd1sETVRae3cjUZT8qeMlA18e1CsuknrzttaD3rARRUssvaDdukwefYnUlXjnyQzuqot4",
