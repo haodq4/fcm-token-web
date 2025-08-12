@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get FCM Token - Happy Club</title>
+</head>
+<body>
+  <h1>Get FCM Token</h1>
+  <button id="getTokenBtn">Get FCM Token</button>
+  <pre id="tokenOutput"></pre>
+
+  <script type="module">
+    import { app } from './google-services-web-happyclub.js';
+    import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-messaging.js";
+
+    const messaging = getMessaging(app);
+
+    document.getElementById("getTokenBtn").addEventListener("click", async () => {
+      try {
+        const currentToken = await getToken(messaging, {
+          vapidKey: "BNkGDlTeioh_8amX8VTd1sETVRae3cjUZT8qeMlA18e1CsuknrzttaD3rARRUssvaDdukwefYnUlXjnyQzuqot4"
+        });
+
+        if (currentToken) {
+          document.getElementById("tokenOutput").textContent = currentToken;
+          console.log("Token:", currentToken);
+        } else {
+          document.getElementById("tokenOutput").textContent = "Cannot get token. Please enable permission to receive notifications.";
+        }
+      } catch (err) {
+        console.error("Error :", err);
+      }
+    });
+  </script>
+</body>
+</html>
