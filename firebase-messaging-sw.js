@@ -12,20 +12,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js';
+import { app } from './google-services-web-happyclub.js';
 import { getMessaging, onBackgroundMessage } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-messaging-sw.js';
-
-// TODO: Replace with your project's actual configuration
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-
-const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
 onBackgroundMessage(messaging, (payload) => {
