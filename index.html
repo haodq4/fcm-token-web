@@ -12,7 +12,7 @@
 
   <script type="module">
     import { app } from './google-services-web-happyclub.js';
-    import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-messaging.js";
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-messaging.js";
 
     const messaging = getMessaging(app);
 
@@ -35,6 +35,17 @@
       } catch (err) {
         console.error("Error :", err);
       }
+    });
+
+    onMessage(messaging, (payload) => {
+      console.log("Foreground message received:", payload);
+      const notificationTitle = payload.notification?.title || "";
+      const notificationOptions = {
+        body: payload.notification?.body || "",
+        icon: "/icon.png"
+      };
+      
+      new Notification(notificationTitle, notificationOptions);
     });
   </script>
 </body>
